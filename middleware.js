@@ -3,8 +3,7 @@ const {listingSchema,reviewSchema}=require("./schema.js");
 const ExpressError=require("./utils/ExpressError.js");
 const Review=require("./models/review");
 const multer = require("multer");
-const { storage } = require("./cloudConfig"); // adjust path if needed
-
+const { storage } = require("./cloudConfig"); 
 
 const upload = multer({ storage });
 
@@ -12,7 +11,7 @@ const uploadImage = (req, res, next) => {
   upload.single("listing[image]")(req, res, function (err) {
     if (err) {
       req.flash("error", err.message);
-      return res.redirect("/listings/new"); // ✅ STOP
+      return res.redirect("/listings/new"); 
     }
     next();
   });
@@ -66,9 +65,10 @@ next();
   if (error) {
     const msg = error.details.map(el => el.message).join(",");
     req.flash("error", msg);
-    return res.redirect("/listings/new"); // ✅ STOP here
+    return res.redirect("/listings/new"); 
   }
   next();
+  
 };
 
 
@@ -77,7 +77,7 @@ next();
   if (error) {
     const msg = error.details.map(el => el.message).join(",");
     req.flash("error", msg);
-    return res.redirect("back"); // ✅ safe for reviews
+    return res.redirect("back");  
   }
   next();
 };
